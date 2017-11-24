@@ -43,8 +43,11 @@ export function key (req, res) {
 }
 
 export function push (req, res) {
-  res.status(200).send()
-  pushImpl(req.query, req.body).catch(e => {
-    console.error(e)
-  })
+  pushImpl(req.query, req.body)
+    .catch(e => {
+      console.error(e)
+    })
+    .then(() => {
+      res.status(200).send()
+    })
 }

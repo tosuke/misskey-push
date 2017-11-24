@@ -36,7 +36,7 @@ async function generatePayload (body) {
         typ: 'repost',
         usr: {
           id: content.user.id,
-          nameId: content.user.nameId,
+          nameId: content.user.screenName,
           name: content.user.name,
           avatar: content.user.avatarUrl
         },
