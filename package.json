@@ -1,0 +1,49 @@
+{
+  "name": "misskey-push",
+  "version": "1.0.0",
+  "description": "webpush service backend for misskey-delta",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "run-p build:*",
+    "build:js": "babel src --out-dir dist",
+    "build:cp": "cpx package.json dist/",
+    "fmt": "run-p fmt:*",
+    "fmt:js": "prettier-standard 'src/**/*.js' '*.js'",
+    "fmt:json":
+      "prettier --parser=json --write 'src/**/*.json' '*.json' .babelrc .prettierrc",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": ["prettier-standard", "git add"],
+    "*.json": ["prettier --parser=json --write", "git add"],
+    ".*rc": ["prettier --parser=json --write", "git add"]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Tosuke/misskey-push.git"
+  },
+  "author": "Tosuke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tosuke/misskey-push/issues"
+  },
+  "homepage": "https://github.com/Tosuke/misskey-push#readme",
+  "dependencies": {
+    "@google-cloud/datastore": "^1.1.0",
+    "axios": "^0.17.1",
+    "google-cloud-runtime-config": "0.0.2",
+    "http-auth-parser": "^1.0.0",
+    "web-push": "^3.2.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "cpx": "^1.5.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.8.2",
+    "prettier-standard": "^7.0.3"
+  }
+}
