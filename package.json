@@ -2,7 +2,7 @@
   "name": "misskey-push",
   "version": "1.0.0",
   "description": "webpush service backend for misskey-delta",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "run-p build:*",
     "build:js": "babel src --out-dir dist",
@@ -11,6 +11,16 @@
     "fmt:js": "prettier-standard 'src/**/*.js' '*.js'",
     "fmt:json":
       "prettier --parser=json --write 'src/**/*.json' '*.json' .babelrc .prettierrc",
+    "deploy": "run-s build deploy-gcloud",
+    "deploy-gcloud": "run-p deploy:*",
+    "deploy:subscribe":
+      "gcloud beta functions deploy subscribe --trigger-http --source=dist --stage-bucket=misskey-push-functions",
+    "deploy:unsubscribe":
+      "gcloud beta functions deploy unsubscribe --trigger-http --source=dist --stage-bucket=misskey-push-functions",
+    "deploy:key":
+      "gcloud beta functions deploy key --trigger-http --source=dist --stage-bucket=misskey-push-functions",
+    "deploy:push":
+      "gcloud beta functions deploy push --trigger-http --source=dist --stage-bucket=misskey-push-functions",
     "precommit": "lint-staged"
   },
   "lint-staged": {
