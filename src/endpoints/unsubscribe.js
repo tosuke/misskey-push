@@ -9,7 +9,7 @@ export default async function unsubscribe (auth, body) {
     if (auth.type === 'basic') {
       return auth
     } else {
-      throw new Error('auth failure')
+      throw new Error('auth-failure')
     }
   })()
   const id = getParam(body, 'id')
@@ -20,6 +20,11 @@ export default async function unsubscribe (auth, body) {
       password
     })
     .then(r => r.data)
+    .catch(e => {
+      if (e.response) {
+        throw new Error('auth-failure')
+      }
+    })
 
   try {
     const triggerUrl = `${config.MISSKEY_PUSH_TRIGGER}?id=${id}`

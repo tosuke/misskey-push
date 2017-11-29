@@ -9,7 +9,7 @@ export default async function subscribe (auth, body) {
     if (auth.type === 'basic') {
       return auth
     } else {
-      throw new Error('auth failure')
+      throw new Error('auth-failure')
     }
   })()
   const endpoint = getParam(body, 'endpoint')
@@ -18,6 +18,11 @@ export default async function subscribe (auth, body) {
   const { id: userId } = await axios
     .get(`${config.MISSKEY_API_BASE}/accounts/@${username}`)
     .then(r => r.data.account)
+    .catch(e => {
+      if (e.response.status === 404) {
+        throw new Error('auth-failure')
+      }
+    })
 
   const { token } = await axios
     .post(`${config.MISSKEY_WEBHOOK_BASE}/sessions`, {
