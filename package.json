@@ -41,6 +41,7 @@
   "dependencies": {
     "@google-cloud/datastore": "^1.1.0",
     "axios": "^0.17.1",
+    "cors": "^2.8.4",
     "google-cloud-runtime-config": "0.0.2",
     "http-auth-parser": "^1.0.0",
     "web-push": "^3.2.4"

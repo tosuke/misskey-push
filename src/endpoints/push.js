@@ -91,9 +91,9 @@ async function generatePayload (body) {
           text: content.message.text,
           file: content.message.file ? content.message.file.id : null,
           usr: {
-            id: content.message.user.id,
-            nameId: content.message.user.screenName,
-            name: content.message.user.name
+            id: content.message.recipient.id,
+            nameId: content.message.recipient.screenName,
+            name: content.message.recipient.name
           }
         }
       }
